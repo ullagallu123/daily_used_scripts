@@ -1,7 +1,7 @@
 #!/bin/bash
 HOSTED_ZONE_ID="Z08801502JQFVUXR02K9R"
 INSTANCE_ID="i-09de590f13a7801c3"
-DNS_NAME="ws.ullagallu.cloud"
+DNS_NAME="ws.konkas.tech"
 
 # Start EC2 instance for WorkStation
 echo "Starting EC2 instance for WorkStation..."
