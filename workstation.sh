@@ -3,8 +3,8 @@ HOSTED_ZONE_ID="Z08801502JQFVUXR02K9R"
 INSTANCE_ID="i-09de590f13a7801c3"
 DNS_NAME="ws.ullagallu.cloud"
 
-# Start EC2 instance for Jenkins Agent
-echo "Starting EC2 instance for Jenkins Agent..."
+# Start EC2 instance for WorkStation
+echo "Starting EC2 instance for WorkStation..."
 aws ec2 start-instances --instance-ids $INSTANCE_ID
 aws ec2 wait instance-running --instance-ids $INSTANCE_ID
 
@@ -16,11 +16,11 @@ echo "Instance ID: $INSTANCE_ID, IPv4: $ipv4_address"
 payload='{"Changes": [{"Action": "UPSERT","ResourceRecordSet": {"Name": "'"$DNS_NAME"'","Type": "A","TTL": 1,"ResourceRecords": [{"Value": "'"$ipv4_address"'"}]}}]}'
 
 # Update Route 53 DNS record
-echo "Updating DNS record for Jenkins Agent..."
+echo "Updating DNS record for WorkStation..."
 if aws route53 change-resource-record-sets --hosted-zone-id $HOSTED_ZONE_ID --change-batch "$payload"; then
-    echo "DNS update for Jenkins Agent was successful."
+    echo "DNS update for WorkStation was successful."
 else
-    echo "Failed to update DNS record for Jenkins Agent."
+    echo "Failed to update DNS record for WorkStation."
 fi
 
 # Verify the updated Route 53 record
