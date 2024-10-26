@@ -5,8 +5,9 @@ systemctl start docker
 usermod -aG docker ec2-user
 systemctl stop docker
 systemctl start docker
-sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
+dnf install tmux -y
 
 # curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 # sudo install minikube-linux-amd64 /usr/local/bin/minikube && rm minikube-linux-amd64
