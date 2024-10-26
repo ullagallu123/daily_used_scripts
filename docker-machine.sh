@@ -6,4 +6,4 @@ aws ec2 run-instances \
   --user-data file://docker-installation.sh \
   --instance-market-options "MarketType=spot,SpotOptions={SpotInstanceType=one-time}" \
   --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=docker}]' \
-  --block-device-mappings 'DeviceName=/dev/xvda,Ebs={VolumeSize=40,VolumeType=gp3,DeleteOnTermination=true}'
+  --block-device-mappings 'DeviceName=/dev/xvda,Ebs={VolumeSize=50,VolumeType=gp3,DeleteOnTermination=true}'
