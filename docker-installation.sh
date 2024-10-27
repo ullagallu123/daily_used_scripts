@@ -8,6 +8,7 @@ systemctl start docker
 curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 dnf install tmux -y
+git clone https://github.com/ullagallu123/instana-.git /home/ec2-user/
 
 # curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 # sudo install minikube-linux-amd64 /usr/local/bin/minikube && rm minikube-linux-amd64
