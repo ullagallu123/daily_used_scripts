@@ -4,7 +4,7 @@ systemctl start docker
 usermod -aG docker ec2-user
 curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
-git clone https://github.com/instana-srk/ibm-instana.git /home/ec2-user/
+git clone https://github.com/instana-srk/ibm-instana.git /home/ec2-user/ibm-instana
 
 
 # curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
