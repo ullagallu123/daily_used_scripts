@@ -30,11 +30,7 @@ def delete_github_org_repo(repo_name):
             print("No JSON message in response")
 
 # List of repositories to delete
-repos_to_delete = [
-    'cart', 'mongo', 'catalogue', 'prac', 'ansible-', 
-    'terraform-', 'automation-tools-setup', 'ansible-roles', 
-    'ansible-playbooks', 'instana-shell', 'srk-ullagallu'
-]
+repos_to_delete = ['shell-script']
 
 # Loop through each repository and delete it
 for repo in repos_to_delete:
