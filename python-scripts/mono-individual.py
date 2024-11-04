@@ -51,11 +51,12 @@ def extract_service_and_push(service_name):
     # Create a new directory for the service
     os.makedirs(service_name, exist_ok=True)
 
-    # Move the service folder to the new directory while preserving the structure
+    # Move only the contents of the service folder to the new directory
     service_path = os.path.join('ibm-instana', service_name)
     
     if os.path.exists(service_path):
-        shutil.move(service_path, service_name)
+        for item in os.listdir(service_path):
+            shutil.move(os.path.join(service_path, item), service_name)
     else:
         print(f'Service {service_name} does not exist in the repository. Skipping...')
         return
