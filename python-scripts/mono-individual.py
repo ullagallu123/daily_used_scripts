@@ -76,24 +76,26 @@ def extract_service_and_push(service_name):
     # Add the remote repository URL
     new_repo_url = f'https://{GITHUB_TOKEN}@github.com/{GITHUB_ORG}/{service_name}.git'
     subprocess.run(f'git remote add origin {new_repo_url}', shell=True, check=True)
-    
-    # Create the initial commit on the main branch
+
+    # Create the main branch
+    subprocess.run('git checkout -b main', shell=True, check=True)
+
+    # Pull changes from the remote repository (this should not error out since the repo is just created)
+    try:
+        subprocess.run('git pull origin main --allow-unrelated-histories', shell=True, check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Failed to pull from remote: {e}")
+
+    # Add all files and make the initial commit
     subprocess.run('git add .', shell=True, check=True)
     subprocess.run(f'git commit -m "Initial commit for {service_name} service"', shell=True, check=True)
 
-    # Attempt to fetch from the remote repository
-    try:
-        subprocess.run('git fetch origin', shell=True, check=True)
-        subprocess.run('git merge origin/main --allow-unrelated-histories', shell=True, check=True)
-    except subprocess.CalledProcessError as e:
-        print(f"Failed to merge changes from remote: {e}")
-    
     # Push to the new repository on the main branch
     try:
         subprocess.run('git push -u origin main', shell=True, check=True)
     except subprocess.CalledProcessError as e:
         print(f"Failed to push {service_name} to the new repository: {e}")
-    
+
     print(f'Successfully pushed {service_name} to the new repository.')
     
     # Clean up: go back to the original directory and remove the cloned repository
