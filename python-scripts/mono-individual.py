@@ -20,13 +20,13 @@ services_to_migrate = [
 
 def create_github_repo(service_name):
     """
-    Create a new GitHub repository for the given service.
+    Create a new public GitHub repository for the given service.
     
     :param service_name: Name of the service to create a repository for.
     """
     try:
         subprocess.run(f'curl -H "Authorization: token {GITHUB_TOKEN}" '
-                       f'-d \'{{"name": "{service_name}", "private": true}}\' '
+                       f'-d \'{{"name": "{service_name}", "private": false}}\' '  # Set private to false for public repo
                        f'https://api.github.com/orgs/{GITHUB_ORG}/repos', shell=True, check=True)
     except subprocess.CalledProcessError as e:
         print(f"Failed to create GitHub repository {service_name}: {e}")
