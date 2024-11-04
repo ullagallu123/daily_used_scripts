@@ -4,8 +4,8 @@ import subprocess
 import getpass
 
 # Configuration
-SOURCE_REPO = 'https://github.com/YOUR_ORG/ibm-instana.git'  # Change to your source repo
-GITHUB_ORG = 'srk-ullagallu'  # Change to your GitHub organization
+SOURCE_REPO = 'https://github.com/srk-ullagallu/ibm-instana.git'  # Source repo
+GITHUB_ORG = 'srk-ullagallu'  # GitHub organization
 GITHUB_TOKEN = getpass.getpass('Enter your GitHub Personal Access Token: ')
 
 # List of services to create repositories for
@@ -25,8 +25,12 @@ def extract_service_and_push(service_name):
     :param service_name: Name of the service to extract and migrate.
     """
     # Clone the source repository
-    subprocess.run(f'git clone {SOURCE_REPO} ibm-instana', shell=True, check=True)
-    
+    try:
+        subprocess.run(f'git clone {SOURCE_REPO} ibm-instana', shell=True, check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Failed to clone repository: {e}")
+        return
+
     # Create a new directory for the service
     os.makedirs(service_name, exist_ok=True)
 
@@ -56,13 +60,16 @@ def extract_service_and_push(service_name):
     
     # Create the initial commit on the main branch
     subprocess.run('git add .', shell=True, check=True)
-    subprocess.run('git commit -m "Initial commit for {service_name} service"', shell=True, check=True)
+    subprocess.run(f'git commit -m "Initial commit for {service_name} service"', shell=True, check=True)
 
     # Create the main branch
     subprocess.run('git branch -m main', shell=True, check=True)
 
     # Push to the new repository on the main branch
-    subprocess.run('git push -u origin main', shell=True, check=True)
+    try:
+        subprocess.run('git push -u origin main', shell=True, check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Failed to push {service_name} to the new repository: {e}")
     
     print(f'Successfully pushed {service_name} to the new repository.')
     
