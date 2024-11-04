@@ -28,7 +28,7 @@ def set_branch_protection(repo_name, branch_name):
         'enforce_admins': True,
         'required_pull_request_reviews': {
             'dismiss_stale_reviews': False,
-            'dismissal_restrictions': None,
+            'dismissal_restrictions': {},  # Set this to an empty object
             'require_code_owner_reviews': False,
             'required_approving_review_count': 1
         },
