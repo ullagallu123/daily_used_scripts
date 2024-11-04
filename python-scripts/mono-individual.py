@@ -51,7 +51,7 @@ def extract_service_and_push(service_name):
     # Create a new directory for the service
     os.makedirs(service_name, exist_ok=True)
 
-    # Move only the contents of the service folder to the new directory
+    # Move the contents of the service folder to the new directory
     service_path = os.path.join('ibm-instana', service_name)
     
     if os.path.exists(service_path):
@@ -80,12 +80,6 @@ def extract_service_and_push(service_name):
 
     # Create the main branch
     subprocess.run('git checkout -b main', shell=True, check=True)
-
-    # Pull changes from the remote repository (this should not error out since the repo is just created)
-    try:
-        subprocess.run('git pull origin main --allow-unrelated-histories', shell=True, check=True)
-    except subprocess.CalledProcessError as e:
-        print(f"Failed to pull from remote: {e}")
 
     # Add all files and make the initial commit
     subprocess.run('git add .', shell=True, check=True)
