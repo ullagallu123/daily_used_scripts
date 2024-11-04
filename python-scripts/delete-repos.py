@@ -2,7 +2,7 @@ import requests
 import getpass
 
 # Configuration
-GITHUB_ORG = 'ullagallu123'
+GITHUB_ORG = 'srk-ullagallu'
 GITHUB_TOKEN = getpass.getpass('Enter your GitHub Personal Access Token: ')
 
 def delete_github_org_repo(repo_name):
@@ -31,8 +31,12 @@ def delete_github_org_repo(repo_name):
 
 # List of repositories to delete
 repos_to_delete = [
-    '3-tier-micro','python_scripts','jenkins-testing','actions-testing',
-    'vpc','sg',
+    'catalogue',
+    'user',
+    'cart',
+    'shipping',
+    'payment',
+    'frontend'
 ]
 
 # Loop through each repository and delete it
