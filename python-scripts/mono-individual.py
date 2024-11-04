@@ -5,9 +5,9 @@ import getpass
 import shutil
 
 # Configuration
-GITHUB_ORG = 'srk-ullagallu'
+GITHUB_ORG = 'srk-ullagallu'  # Replace with your GitHub organization name
 GITHUB_TOKEN = getpass.getpass('Enter your GitHub Personal Access Token: ')
-SOURCE_REPO = 'https://github.com/{GITHUB_ORG}/ibm-instana.git'
+SOURCE_REPO = f'https://github.com/{GITHUB_ORG}/ibm-instana.git'  # Ensure this is correctly formatted
 
 def create_github_repo(repo_name):
     """
@@ -23,7 +23,7 @@ def create_github_repo(repo_name):
     }
     data = {
         'name': repo_name,
-        'private': False
+        'private': False  # Set to True if you want to create private repositories
     }
     
     response = requests.post(url, headers=headers, json=data)
