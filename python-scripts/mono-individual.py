@@ -2,6 +2,7 @@ import os
 import shutil
 import subprocess
 import getpass
+import requests
 
 # Configuration
 SOURCE_REPO = 'https://github.com/srk-ullagallu/ibm-instana.git'  # Source repo
@@ -17,6 +18,26 @@ services_to_migrate = [
     'payment',
     'frontend'
 ]
+
+def create_github_repo(service_name):
+    """Create a new repository on GitHub for the given service."""
+    url = f'https://api.github.com/orgs/{GITHUB_ORG}/repos'
+    headers = {
+        'Authorization': f'token {GITHUB_TOKEN}',
+        'Accept': 'application/vnd.github.v3+json'
+    }
+    data = {
+        'name': service_name,
+        'private': False,  # Set to True if you want private repos
+        'auto_init': True  # Automatically initialize with an empty README
+    }
+    response = requests.post(url, json=data, headers=headers)
+    if response.status_code == 201:
+        print(f'Repository {service_name} created successfully.')
+    elif response.status_code == 422:
+        print(f'Repository {service_name} already exists.')
+    else:
+        print(f'Failed to create repository {service_name}: {response.json()}')
 
 def extract_service_and_push(service_name):
     """
@@ -56,6 +77,9 @@ def extract_service_and_push(service_name):
     # Configure user identity for the repository
     subprocess.run('git config user.name "ullagall123"', shell=True, check=True)  # Replace with your name
     subprocess.run('git config user.email "sivaram0434@gmail.com"', shell=True, check=True)  # Replace with your email
+
+    # Create the GitHub repository for this service
+    create_github_repo(service_name)
 
     # Add the remote repository URL
     new_repo_url = f'https://{GITHUB_TOKEN}@github.com/{GITHUB_ORG}/{service_name}.git'
