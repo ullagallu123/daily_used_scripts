@@ -4,8 +4,8 @@ import subprocess
 import getpass
 
 # Configuration
-SOURCE_REPO = 'https://github.com/srk-ullagallu/ibm-instana.git'  # Change to your source repo
-GITHUB_ORG = 'srk-ullagallu'  # Change to your GitHub organization
+SOURCE_REPO = 'https://github.com/srk-ullagallu/ibm-instana.git'
+GITHUB_ORG = 'srk-ullagallu'
 GITHUB_TOKEN = getpass.getpass('Enter your GitHub Personal Access Token: ')
 
 # List of services to create repositories for
