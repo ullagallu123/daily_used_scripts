@@ -24,6 +24,10 @@ def extract_service_and_push(service_name):
     
     :param service_name: Name of the service to extract and migrate.
     """
+    # Check if the ibm-instana directory already exists and remove it if it does
+    if os.path.exists('ibm-instana'):
+        shutil.rmtree('ibm-instana')
+
     # Clone the source repository
     try:
         subprocess.run(f'git clone {SOURCE_REPO} ibm-instana', shell=True, check=True)
@@ -41,7 +45,6 @@ def extract_service_and_push(service_name):
         shutil.move(service_path, service_name)
     else:
         print(f'Service {service_name} does not exist in the repository. Skipping...')
-        shutil.rmtree('ibm-instana')  # Clean up cloned repo
         return
 
     # Change to the new service directory
