@@ -1,7 +1,8 @@
 #!/bin/bash
-HOSTED_ZONE_ID="Z08801502JQFVUXR02K9R"
+HOSTED_ZONE_ID="Z057221627MV57YGU9TM3"
 INSTANCE_ID="i-0cf43842a1e6a9bec"
-DNS_NAME="jm.ullagallu.cloud"
+DNS_NAME="jm.ullagallubuffellomilk.store"
+
 
 # Start EC2 instance for Jenkins Master
 echo "Starting EC2 instance for Jenkins Master..."
