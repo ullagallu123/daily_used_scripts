@@ -4,11 +4,11 @@ HOSTED_ZONE_ID="Z08801502JQFVUXR02K9R"
 RECORD_NAME="docker.konkas.tech"   
 
 AMI_ID=$(aws ec2 describe-images \
-    --owners "amazon" \
-    --filters "Name=name,Values=amzn3-ami-hvm-*-x86_64-gp3" \
-              "Name=state,Values=available" \
-    --query "Images | sort_by(@, &CreationDate) | [-1].ImageId" \
-    --output text)
+>     --owners "amazon" \
+>     --region ap-south-1 \
+>     --filters "Name=name,Values=al2023-ami-2023*" "Name=state,Values=available" \
+>     --query "Images | sort_by(@, &CreationDate)[-1].ImageId" \
+>     --output text)
 
 if [ -z "$AMI_ID" ]; then
   echo "Error: Failed to retrieve the latest Amazon Linux 3 AMI ID."
