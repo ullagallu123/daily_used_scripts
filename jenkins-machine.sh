@@ -1,11 +1,11 @@
 #!/bin/bash
 
-HOSTED_ZONE_ID="Z057221627MV57YGU9TM3"  
-RECORD_NAME="jm.ullagallubuffellomilk.store"   
+HOSTED_ZONE_ID="Z057221627MV57YGU9TM3"
+RECORD_NAME="jm.ullagallubuffellomilk.store"
 
 AMI_ID=$(aws ec2 describe-images \
     --owners "amazon" \
-    --filters "Name=name,Values=amzn3-ami-hvm-*-x86_64-gp3" \
+    --filters "Name=name,Values=amzn3-ami-hvm-*-x86_64-gp3*" \
               "Name=state,Values=available" \
     --query "Images | sort_by(@, &CreationDate) | [-1].ImageId" \
     --output text)
@@ -26,7 +26,13 @@ INSTANCE_ID=$(aws ec2 run-instances \
   --query 'Instances[0].InstanceId' \
   --output text)
 
+if [ -z "$INSTANCE_ID" ]; then
+  echo "Error: Failed to launch the EC2 instance."
+  exit 1
+fi
+
 aws ec2 wait instance-running --instance-ids "$INSTANCE_ID"
+
 PUBLIC_IP=$(aws ec2 describe-instances \
   --instance-ids "$INSTANCE_ID" \
   --query 'Reservations[0].Instances[0].PublicIpAddress' \
@@ -36,7 +42,6 @@ if [ -z "$PUBLIC_IP" ]; then
   echo "Error: Failed to retrieve the public IP address for instance $INSTANCE_ID."
   exit 1
 fi
-
 
 aws route53 change-resource-record-sets \
   --hosted-zone-id "$HOSTED_ZONE_ID" \
