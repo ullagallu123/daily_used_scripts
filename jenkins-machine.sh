@@ -21,7 +21,7 @@ INSTANCE_ID=$(aws ec2 run-instances \
   --key-name dev \
   --user-data file://jenkins-installation.sh \
   --instance-market-options "MarketType=spot,SpotOptions={SpotInstanceType=one-time}" \
-  --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=docker}]' \
+  --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=jenkins}]' \
   --block-device-mappings 'DeviceName=/dev/xvda,Ebs={VolumeSize=8,VolumeType=gp3,DeleteOnTermination=true}' \
   --query 'Instances[0].InstanceId' \
   --output text)
