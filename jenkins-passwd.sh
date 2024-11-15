@@ -27,11 +27,15 @@ for plugin in "${PLUGINS[@]}"; do
     curl -X POST -u "$ADMIN_USER:$ADMIN_PASSWORD" \
         "$JENKINS_URL/pluginManager/installNecessaryPlugins" \
         -d "<jenkins><install plugin=\"$plugin@latest\"/></jenkins>" \
-        --header "Content-Type: text/xml"
+        --header "Content-Type: text/xml" || {
+            echo "Failed to install plugin $plugin."
+            exit 1
+        }
 done
 
-# Step 4: Set up the admin user
+# Step 4: Set up the admin user (ensure directory exists)
 echo "Setting up admin user..."
+sudo mkdir -p "$JENKINS_HOME/users/$ADMIN_USER"
 cat <<EOF | sudo tee "$JENKINS_HOME/users/$ADMIN_USER/config.xml"
 <?xml version='1.1' encoding='UTF-8'?>
 <user>
