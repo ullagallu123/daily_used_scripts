@@ -4,11 +4,11 @@ HOSTED_ZONE_ID="Z08801502JQFVUXR02K9R"
 RECORD_NAME="docker.konkas.tech"   
 
 AMI_ID=$(aws ec2 describe-images \
->     --owners "amazon" \
->     --region ap-south-1 \
->     --filters "Name=name,Values=al2023-ami-2023*" "Name=state,Values=available" \
->     --query "Images | sort_by(@, &CreationDate)[-1].ImageId" \
->     --output text)
+    --owners "amazon" \
+    --region ap-south-1 \
+    --filters "Name=name,Values=al2023-ami-2023*" "Name=state,Values=available" \
+    --query "Images | sort_by(@, &CreationDate)[-1].ImageId" \
+    --output text)
 
 if [ -z "$AMI_ID" ]; then
   echo "Error: Failed to retrieve the latest Amazon Linux 3 AMI ID."
@@ -17,12 +17,12 @@ fi
 
 INSTANCE_ID=$(aws ec2 run-instances \
   --image-id "$AMI_ID" \
-  --instance-type t3a.large \
+  --instance-type t3a.medium \
   --key-name dev \
   --user-data file://docker-installation.sh \
   --instance-market-options "MarketType=spot,SpotOptions={SpotInstanceType=one-time}" \
   --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=docker}]' \
-  --block-device-mappings 'DeviceName=/dev/xvda,Ebs={VolumeSize=50,VolumeType=gp3,DeleteOnTermination=true}' \
+  --block-device-mappings 'DeviceName=/dev/xvda,Ebs={VolumeSize=20,VolumeType=gp3,DeleteOnTermination=true}' \
   --query 'Instances[0].InstanceId' \
   --output text)
 
