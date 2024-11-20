@@ -17,7 +17,7 @@ fi
 
 INSTANCE_ID=$(aws ec2 run-instances \
   --image-id "$AMI_ID" \
-  --instance-type t3a.medium \
+  --instance-type t3a.small \
   --key-name dev \
   --user-data file://docker-installation.sh \
   --instance-market-options "MarketType=spot,SpotOptions={SpotInstanceType=one-time}" \
