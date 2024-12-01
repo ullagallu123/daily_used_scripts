@@ -1,7 +1,7 @@
 # This will stop the jenkins server and agent
 #!/bin/bash
 
-instances=("i-0cf43842a1e6a9bec" "i-09de590f13a7801c3")
+instances=("i-02b0d6bea8bddd23a")
 
 # Stop EC2 instances
 for instance_id in "${instances[@]}"; do
