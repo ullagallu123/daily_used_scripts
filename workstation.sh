@@ -1,7 +1,7 @@
 #!/bin/bash
-HOSTED_ZONE_ID="Z057221627MV57YGU9TM3"
-INSTANCE_ID="i-09de590f13a7801c3"
-DNS_NAME="ws.ullagallubuffellomilk.store"
+HOSTED_ZONE_ID="Z04410211MZ57SQOXFNI3"
+INSTANCE_ID="i-02b0d6bea8bddd23a"
+DNS_NAME="workstation.bapatlas.site"
 read -p "Please Enter Desired Instance Type: " NEW_INSTANCE_TYPE
 
 # Check the current state of the EC2 instance
