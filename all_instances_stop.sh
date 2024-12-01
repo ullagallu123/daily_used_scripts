@@ -1,4 +1,4 @@
-# This will stop the jenkins server and agent
+
 #!/bin/bash
 
 instances=("i-02b0d6bea8bddd23a")
