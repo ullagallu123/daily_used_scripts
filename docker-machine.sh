@@ -33,8 +33,8 @@ INSTANCE_ID=$(aws ec2 describe-instances \
   --query "Reservations[0].Instances[0].InstanceId" \
   --output text)
 
-if [ -z "$INSTANCE_ID" ]; then
-  # Instance not found, create a new one
+if [ "$INSTANCE_ID" == "None" ] || [ -z "$INSTANCE_ID" ]; then
+  # Instance not found or the ID is invalid, create a new one
   echo "No running instance found, creating a new one..."
 
   INSTANCE_ID=$(aws ec2 run-instances \
