@@ -1,7 +1,7 @@
 #!/bin/bash
 
-HOSTED_ZONE_ID="Z08801502JQFVUXR02K9R"  
-RECORD_NAME="docker.konkas.tech"   
+HOSTED_ZONE_ID="Z04410211MZ57SQOXFNI3"  
+RECORD_NAME="docker.bapatlas.site"   
 
 AMI_ID=$(aws ec2 describe-images \
     --owners "amazon" \
