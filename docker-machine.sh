@@ -4,7 +4,17 @@ HOSTED_ZONE_ID="Z04410211MZ57SQOXFNI3"
 RECORD_NAME="docker.bapatlas.site"   
 INSTANCE_TAG="Name=docker"
 
-# Step 1: Retrieve the latest Amazon Linux 2023 AMI ID
+# Step 1: Prompt for the instance type
+echo "Please enter the instance type (e.g., t3a.medium, t3.medium): "
+read INSTANCE_TYPE
+
+# Ensure the input is not empty
+if [ -z "$INSTANCE_TYPE" ]; then
+  echo "Error: Instance type cannot be empty."
+  exit 1
+fi
+
+# Step 2: Retrieve the latest Amazon Linux 2023 AMI ID
 AMI_ID=$(aws ec2 describe-images \
     --owners "amazon" \
     --region ap-south-1 \
@@ -17,7 +27,7 @@ if [ -z "$AMI_ID" ]; then
   exit 1
 fi
 
-# Step 2: Check if there is already a running instance with the tag "Name=docker"
+# Step 3: Check if there is already a running instance with the tag "Name=docker"
 INSTANCE_ID=$(aws ec2 describe-instances \
   --filters "Name=tag:Name,Values=$INSTANCE_TAG" "Name=instance-state-name,Values=running" \
   --query "Reservations[0].Instances[0].InstanceId" \
@@ -29,7 +39,7 @@ if [ -z "$INSTANCE_ID" ]; then
 
   INSTANCE_ID=$(aws ec2 run-instances \
     --image-id "$AMI_ID" \
-    --instance-type t3a.medium \
+    --instance-type "$INSTANCE_TYPE" \
     --key-name dev \
     --user-data file://docker-installation.sh \
     --instance-market-options "MarketType=spot,SpotOptions={SpotInstanceType=one-time}" \
@@ -50,7 +60,7 @@ else
   echo "Using existing running instance with ID $INSTANCE_ID."
 fi
 
-# Step 3: Get the public IP of the instance
+# Step 4: Get the public IP of the instance
 PUBLIC_IP=$(aws ec2 describe-instances \
   --instance-ids "$INSTANCE_ID" \
   --query 'Reservations[0].Instances[0].PublicIpAddress' \
@@ -61,7 +71,7 @@ if [ -z "$PUBLIC_IP" ]; then
   exit 1
 fi
 
-# Step 4: Check if the Route 53 record already exists with the same IP
+# Step 5: Check if the Route 53 record already exists with the same IP
 EXISTING_IP=$(aws route53 list-resource-record-sets \
   --hosted-zone-id "$HOSTED_ZONE_ID" \
   --query "ResourceRecordSets[?Name=='$RECORD_NAME'].ResourceRecords[0].Value" \
