@@ -8,6 +8,22 @@ INSTANCE_TAG="Name=docker"
 echo "Please enter the instance type (e.g., t3a.medium, t3.medium): "
 read INSTANCE_TYPE
 
+echo "Do you want to launch a Spot instance or an On-Demand instance? (Enter 'spot' or 'on-demand')"
+read INSTANCE_TYPE_CHOICE
+
+# Validate input
+if [[ "$INSTANCE_TYPE_CHOICE" != "spot" && "$INSTANCE_TYPE_CHOICE" != "on-demand" ]]; then
+  echo "Invalid input! Please enter 'spot' or 'on-demand'."
+  exit 1
+fi
+
+# Instance Market Option (Spot or On-Demand)
+if [[ "$INSTANCE_TYPE_CHOICE" == "spot" ]]; then
+  INSTANCE_MARKET_OPTIONS="--instance-market-options MarketType=spot,SpotOptions={SpotInstanceType=one-time}"
+else
+  INSTANCE_MARKET_OPTIONS=""  # Empty for On-Demand instances
+fi
+
 # Ensure the input is not empty
 if [ -z "$INSTANCE_TYPE" ]; then
   echo "Error: Instance type cannot be empty."
@@ -42,7 +58,7 @@ if [ "$INSTANCE_ID" == "None" ] || [ -z "$INSTANCE_ID" ]; then
     --instance-type "$INSTANCE_TYPE" \
     --key-name bapatlas.site \
     --user-data file://docker-installation.sh \
-    --instance-market-options "MarketType=spot,SpotOptions={SpotInstanceType=one-time}" \
+    $INSTANCE_MARKET_OPTIONS \
     --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=docker}]" \
     --block-device-mappings 'DeviceName=/dev/xvda,Ebs={VolumeSize=20,VolumeType=gp3,DeleteOnTermination=true}' \
     --query 'Instances[0].InstanceId' \
@@ -93,8 +109,8 @@ else
                 \"TTL\": 60,
                 \"ResourceRecords\": [{\"Value\": \"$PUBLIC_IP\"}]
             }
-        }]
-    }"
+        }]}
+    "
   echo "DNS record $RECORD_NAME updated to IP: $PUBLIC_IP"
 fi
 
