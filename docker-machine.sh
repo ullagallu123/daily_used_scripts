@@ -39,7 +39,7 @@ AMI_ID=$(aws ec2 describe-images \
     --owners "amazon" \
     --region ap-south-1 \
     --filters "Name=name,Values=al2023-ami-2023*" "Name=state,Values=available" "Name=architecture,Values=x86_64" \
-    --query "Images | sort_by(@, &CreationDate)[-1].ImageId" \
+    ---query "Images | sort_by(@, &CreationDate)[-1].ImageId" \
     --output text)
 
 if [ -z "$AMI_ID" ]; then
