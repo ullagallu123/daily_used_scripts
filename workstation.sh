@@ -1,7 +1,7 @@
 #!/bin/bash
 HOSTED_ZONE_ID="Z04410211MZ57SQOXFNI3"
-INSTANCE_ID="i-02b0d6bea8bddd23a"
-DNS_NAME="workstation.bapatlas.site"
+INSTANCE_ID="i-0109085075a2bc14f"
+DNS_NAME="ws.bapatlas.site"
 read -p "Please Enter Desired Instance Type: " NEW_INSTANCE_TYPE
 
 # Check the current state of the EC2 instance
