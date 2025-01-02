@@ -1,7 +1,7 @@
 
 #!/bin/bash
 
-instances=("i-0109085075a2bc14f")
+instances=("i-0109085075a2bc14f","i-0cbc5d64962ecb410")
 
 # Stop EC2 instances
 for instance_id in "${instances[@]}"; do
