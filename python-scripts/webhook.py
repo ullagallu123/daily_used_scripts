@@ -16,7 +16,7 @@ repos = [
 ]
 
 # Webhook configuration
-WEBHOOK_URL = 'http://workstation.bapatlas.site:8080/github-webhook/'
+WEBHOOK_URL = 'http://ws.bapatlas.site:8080/github-webhook/'
 WEBHOOK_EVENTS = ['push', 'pull_request']
 
 def add_webhook(repo_name):
