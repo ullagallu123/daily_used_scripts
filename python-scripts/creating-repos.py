@@ -46,7 +46,17 @@ def main():
         ).split(',')
         repos_to_create = [repo.strip() for repo in repos_to_create if repo.strip()]
     elif choice == '2':
-        repos_to_create = ['spa-frontend', 'spa-backend', 'spa-3tier']
+        repos_to_create = ['3tier-frontend',
+                           '3tier-backend', 
+                           '3tier',
+                           'instana-catalogue',
+                           'instana-user',
+                           'instana-cart',
+                           'instana-shipping',
+                           'instana-payment',
+                           'instana-frontend',
+                           'instana-dispatch'
+                           'instana']
         print(f"Using predefined list: {', '.join(repos_to_create)}")
     else:
         print("Invalid choice. Exiting.")
