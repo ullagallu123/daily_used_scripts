@@ -3,7 +3,7 @@ import getpass
 import json
 
 # Configuration
-GITHUB_ORG = 'srk-ullagallu'
+GITHUB_ORG = 'ullagallu123-projects'
 GITHUB_TOKEN = getpass.getpass('Enter your GitHub Personal Access Token: ')
 
 repos = [
@@ -12,7 +12,8 @@ repos = [
     'cart',
     'shipping',
     'payment',
-    'frontend'
+    'frontend',
+    'dispatch'
 ]
 
 # Webhook configuration
