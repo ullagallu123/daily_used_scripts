@@ -46,7 +46,7 @@ def main():
         ).split(',')
         repos_to_create = [repo.strip() for repo in repos_to_create if repo.strip()]
     elif choice == '2':
-        repos_to_create = ['frontend', 'backend', 'mysql', '3tier']
+        repos_to_create = ['frontend', 'backend', '3tier']
         print(f"Using predefined list: {', '.join(repos_to_create)}")
     else:
         print("Invalid choice. Exiting.")
