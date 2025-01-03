@@ -36,7 +36,8 @@ repos_to_delete = [
     'cart',
     'shipping',
     'payment',
-    'frontend'
+    'frontend',
+    'ibm-instana'
 ]
 
 # Loop through each repository and delete it
