@@ -31,13 +31,17 @@ def delete_github_org_repo(repo_name):
 
 # List of repositories to delete
 repos_to_delete = [
-    'catalogue',
-    'user',
-    'cart',
-    'shipping',
-    'payment',
-    'frontend',
-    'ibm-instana'
+    '3tier-frontend',
+    '3tier-backend', 
+    '3tier',
+    'instana-catalogue',
+    'instana-user',
+    'instana-cart',
+    'instana-shipping',
+    'instana-payment',
+    'instana-frontend',
+    'instana-dispatch',
+    'instana'
 ]
 
 # Loop through each repository and delete it

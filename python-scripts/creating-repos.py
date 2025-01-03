@@ -55,7 +55,7 @@ def main():
                            'instana-shipping',
                            'instana-payment',
                            'instana-frontend',
-                           'instana-dispatch'
+                           'instana-dispatch',
                            'instana']
         print(f"Using predefined list: {', '.join(repos_to_create)}")
     else:
