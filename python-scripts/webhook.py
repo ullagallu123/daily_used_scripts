@@ -7,13 +7,15 @@ GITHUB_ORG = 'ullagallu123-projects'
 GITHUB_TOKEN = getpass.getpass('Enter your GitHub Personal Access Token: ')
 
 repos = [
-    'catalogue',
-    'user',
-    'cart',
-    'shipping',
-    'payment',
-    'frontend',
-    'dispatch'
+    '3tier-frontend',
+    '3tier-backend', 
+    'instana-catalogue',
+    'instana-user',
+    'instana-cart',
+    'instana-shipping',
+    'instana-payment',
+    'instana-frontend',
+    'instana-dispatch'
 ]
 
 # Webhook configuration
