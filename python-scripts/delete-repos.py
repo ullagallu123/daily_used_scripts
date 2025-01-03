@@ -2,7 +2,7 @@ import requests
 import getpass
 
 # Configuration
-GITHUB_ORG = 'srk-ullagallu'
+GITHUB_ORG = 'ullagallu123-projects'
 GITHUB_TOKEN = getpass.getpass('Enter your GitHub Personal Access Token: ')
 
 def delete_github_org_repo(repo_name):
